@@ -89,7 +89,7 @@ const flappyBird = {
       flappyBird.largura, flappyBird.altura,
     );
   }
-}
+};
 
 // [mensagemGetReady]
 const mensagemGetReady = {
@@ -109,19 +109,51 @@ const mensagemGetReady = {
       mensagemGetReady.w, mensagemGetReady.h
     );
   }
+};
+
+// [Telas]
+let telaAtiva = {};
+function mudaParaTela(novaTela) {
+  telaAtiva = novaTela;
+
 }
+
+const Telas = {
+  INICIO: {
+    desenha() {
+
+      planoDeFundo.desenha();
+      chao.desenha();
+      flappyBird.desenha();
+      mensagemGetReady.desenha();
+    },
+    atualiza() {
+
+    },
+  }
+};
+
+Telas.JOGO = {
+  desenha() {
+
+    planoDeFundo.desenha();
+    chao.desenha();
+    flappyBird.desenha();
+  },
+  atualiza() {
+
+    flappyBird.atualiza();
+  },
+};
+
 
 function loop() {
  
-  flappyBird.atualiza();
-  planoDeFundo.desenha();
-  chao.desenha();
-  flappyBird.desenha();
-  mensagemGetReady.desenha();
-
-  
+  telaAtiva.desenha();
+  telaAtiva.atualiza();
 
   requestAnimationFrame(loop);
-}
+};
 
+mudaParaTela(Telas.INICIO);
 loop();
