@@ -57,9 +57,9 @@ function criaChao() {
       const repeteEm = chao.largura / 2;
       const movimentacao = chao.x - movimentoDoChao;
 
-      //console.log('[chao.x]', chao.x);
-      //console.log('[repeteEm]', repeteEm);
-      //console.log('[movimentacao]', movimentacao % repeteEm);
+      /*console.log('[chao.x]', chao.x);
+      console.log('[repeteEm]', repeteEm);
+      console.log('[movimentacao]', movimentacao % repeteEm);*/
 
       chao.x = movimentacao % repeteEm;
     },
@@ -137,15 +137,21 @@ function criaFlappyBird() {
     ],
     frameAtual: 0,
     atualizaFrameAtual() {
-      const baseDoIncremento = 1;
-      const incremento = baseDoIncremento + flappyBird.frameAtual;
-      const baseRepeticao = flappyBird.movimentos.length;
 
-      console.log('[incremento]', incremento);
+      const intervaloDeFrames = 10;
+      const passouIntervalo = frames % intervaloDeFrames === 0;
+      console.log('passouIntervalo')
+
+      if (passouIntervalo) {
+
+        const baseDoIncremento = 1;
+        const incremento = baseDoIncremento + flappyBird.frameAtual;
+        const baseRepeticao = flappyBird.movimentos.length;
+        flappyBird.frameAtual = incremento % baseRepeticao;
+      }
+      /*console.log('[incremento]', incremento);
       console.log('[baseRepeticao]', baseRepeticao);
-      console.log('[frame]', incremento % baseRepeticao);
-
-      flappyBird.frameAtual = incremento % baseRepeticao;
+      console.log('[frame]', incremento % baseRepeticao);*/
     },
     desenha() {
 
