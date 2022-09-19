@@ -85,7 +85,7 @@ function criaChao() {
   return chao;
 };
 
-
+// [Colisão]
 function fazColisao(flappyBird, chao) {
 
   const flappyBirdY = flappyBird.y + flappyBird.altura;
@@ -93,13 +93,14 @@ function fazColisao(flappyBird, chao) {
 
   if (flappyBirdY >= chaoY) {
     return true;
-  };
+  }
 
   return false;
 };
 
+// [FlappyBird]
 function criaFlappyBird() {
-    // [FlappyBird]
+
   const flappyBird = {
     spriteX: 0,
     spriteY: 0,
@@ -139,7 +140,7 @@ function criaFlappyBird() {
 
       const intervaloDeFrames = 10;
       const passouIntervalo = frames % intervaloDeFrames === 0;
-      console.log('passouIntervalo')
+      //console.log('passouIntervalo')
 
       if (passouIntervalo) {
 
@@ -169,7 +170,7 @@ function criaFlappyBird() {
   return flappyBird;
 };
 
-// [mensagemGetReady]
+// [Mensagem Get Ready]
 const mensagemGetReady = {
   sX: 134,
   sY: 0,
@@ -189,7 +190,7 @@ const mensagemGetReady = {
   }
 };
 
-// [mensagemGameOver]
+// [Mensagem Game Over]
 const mensagemGameOver = {
   sX: 134,
   sY: 153,
@@ -246,6 +247,7 @@ function criaCanos() {
         // [Cano do Chão]
         const canoChaoX = par.x;
         const canoChaoY = canos.altura + espacamentoEntreCanos + randomY;
+
         contexto.drawImage(
           sprites,
           canos.chao.spriteX, canos.chao.spriteY,
@@ -270,8 +272,7 @@ function criaCanos() {
         const cabecaFlappy = globais.flappyBird.y;
         const peFlappy = globais.flappyBird.y + globais.flappyBird.altura;
 
-      if (globais.flappyBird.x >= par.x) {
-        console.log('FlappyBird invadiu a área dos canos');
+      if ((globais.flappyBird.x + globais.flappyBird.largura) >= par.x) {
 
         if (cabecaFlappy <= par.canoCeu.y) {
           return true;
@@ -280,7 +281,7 @@ function criaCanos() {
         if (peFlappy >= par.canoChao.y) {
           return true;
         }
-      }
+      };
 
       return false;
     },
@@ -302,6 +303,7 @@ function criaCanos() {
 
         if (canos.temColisaoComFlappyBird(par)) {
           console.log('Você perdeu!')
+          som_HIT.play();
           mudaParaTela(Telas.GAME_OVER);
         }
 
@@ -309,12 +311,13 @@ function criaCanos() {
           canos.pares.shift();
         }
       });
-    }
+    },
   }
 
   return canos;
 };
 
+// [Placar]
 function criaPlacar() {
   
   const placar = {
