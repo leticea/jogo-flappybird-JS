@@ -208,8 +208,11 @@ function criaCanos() {
     espaco: 80,
     desenha() {
 
+      const randomY = -200;
+      const espacamentoEntreCanos = 90;
+
       const canoCeuX = 220;
-      const canoCeuY = 0;
+      const canoCeuY = randomY;
       // [Cano do Céu]
       contexto.drawImage(
         sprites,
@@ -219,8 +222,9 @@ function criaCanos() {
         canos.largura, canos.altura,
       )
 
+      // [Cano do Chão]
       const canoChaoX = 220;
-      const canoChaoY = canos.altura;
+      const canoChaoY = canos.altura + espacamentoEntreCanos + randomY;
       contexto.drawImage(
         sprites,
         canos.chao.spriteX, canos.chao.spriteY,
@@ -229,6 +233,9 @@ function criaCanos() {
         canos.largura, canos.altura,
       )
     },
+    atualiza() {
+      
+    }
   }
   return canos;
 };
