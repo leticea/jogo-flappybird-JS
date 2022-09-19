@@ -300,8 +300,13 @@ function criaCanos() {
 function criaPlacar() {
   
   const placar = {
+
+    pontuacao: 0,
     desenha() {
 
+      contexto.font = '50px "VT323"';
+      contexto.fillStyle = 'white';
+      contexto.fillText(`Hello world ${placar.pontuacao}`, 50, 90);
     },
     atualiza() {
 
