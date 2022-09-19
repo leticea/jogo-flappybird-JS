@@ -297,6 +297,19 @@ function criaCanos() {
   return canos;
 };
 
+function criaPlacar() {
+  
+  const placar = {
+    desenha() {
+
+    },
+    atualiza() {
+
+    }
+  }
+  return placar;
+}
+
 // [Telas]
 const globais = {};
 let telaAtiva = {};
@@ -336,12 +349,17 @@ const Telas = {
 };
 
 Telas.JOGO = {
+  inicializa() {
+
+    globais.placar = criaPlacar();
+  },
   desenha() {
 
     planoDeFundo.desenha();
     globais.canos.desenha();
     globais.chao.desenha();
     globais.flappyBird.desenha();
+    globais.placar.desenha();
   },
   click() {
 
@@ -352,6 +370,7 @@ Telas.JOGO = {
     globais.canos.atualiza();
     globais.chao.atualiza();
     globais.flappyBird.atualiza();
+    globais.placar.atualiza();
   }
 };
 
