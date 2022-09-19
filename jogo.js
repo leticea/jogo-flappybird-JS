@@ -120,10 +120,8 @@ function criaFlappyBird() {
       if (fazColisao(flappyBird, globais.chao)) {
         console.log('Fez colisao');
         som_HIT.play();
-
-        setTimeout(() => {
-          mudaParaTela(Telas.INICIO);
-        }, 500);
+     
+        mudaParaTela(Telas.GAME_OVER);        
         return;
       };
 
@@ -187,6 +185,26 @@ const mensagemGetReady = {
       mensagemGetReady.w, mensagemGetReady.h,
       mensagemGetReady.x, mensagemGetReady.y,
       mensagemGetReady.w, mensagemGetReady.h
+    );
+  }
+};
+
+// [mensagemGameOver]
+const mensagemGameOver = {
+  sX: 134,
+  sY: 153,
+  w: 226,
+  h: 200,
+  x: (canvas.width / 2) - 226 / 2,
+  y: 50,
+  desenha() {
+
+    contexto.drawImage(
+      sprites,
+      mensagemGameOver.sX, mensagemGameOver.sY,
+      mensagemGameOver.w, mensagemGameOver.h,
+      mensagemGameOver.x, mensagemGameOver.y,
+      mensagemGameOver.w, mensagemGameOver.h
     );
   }
 };
@@ -284,7 +302,7 @@ function criaCanos() {
 
         if (canos.temColisaoComFlappyBird(par)) {
           console.log('Você perdeu!')
-          mudaParaTela(Telas.INICIO);
+          mudaParaTela(Telas.GAME_OVER);
         }
 
         if (par.x + canos.largura <= 0) {
@@ -304,16 +322,25 @@ function criaPlacar() {
     pontuacao: 0,
     desenha() {
 
-      contexto.font = '50px "VT323"';
+      contexto.font = '35px "VT323"';
+      contexto.textAlign = 'right';
       contexto.fillStyle = 'white';
-      contexto.fillText(`Hello world ${placar.pontuacao}`, 50, 90);
+      contexto.fillText(`Points ${placar.pontuacao}`, canvas.width - 10, 35);
     },
     atualiza() {
 
+      const intervaloDeFrames = 25;
+      const passouIntervalo = frames % intervaloDeFrames === 0;
+
+      if (passouIntervalo) {
+
+        placar.pontuacao = placar.pontuacao + 1;
+      }
     }
-  }
+  };
+
   return placar;
-}
+};
 
 // [Telas]
 const globais = {};
@@ -376,6 +403,21 @@ Telas.JOGO = {
     globais.chao.atualiza();
     globais.flappyBird.atualiza();
     globais.placar.atualiza();
+  }
+};
+
+Telas.GAME_OVER = {
+
+  desenha() {
+
+    mensagemGameOver.desenha();
+  },
+  atualiza() {
+
+  },
+  click() {
+
+    mudaParaTela(Telas.INICIO);
   }
 };
 
