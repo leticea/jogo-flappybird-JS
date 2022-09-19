@@ -275,8 +275,8 @@ function criaCanos() {
 
     temColisaoComFlappyBird(par) {
 
-        const cabecaFlappy = globais.flappyBird.y;
-        const peFlappy = globais.flappyBird.y + globais.flappyBird.altura;
+      const cabecaFlappy = globais.flappyBird.y;
+      const peFlappy = globais.flappyBird.y + globais.flappyBird.altura;
 
       if ((globais.flappyBird.x + globais.flappyBird.largura) >= par.x) {
 
@@ -296,6 +296,7 @@ function criaCanos() {
     atualiza() {
 
       const passou100Frames = frames % 100 === 0;
+
       if (passou100Frames) {
         console.log('Passou 100 frames');
         canos.pares.push({
@@ -354,6 +355,7 @@ function criaPlacar() {
 // [Telas]
 const globais = {};
 let telaAtiva = {};
+
 function mudaParaTela(novaTela) {
 
   telaAtiva = novaTela;
